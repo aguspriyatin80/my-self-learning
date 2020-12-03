@@ -1,0 +1,554 @@
+mongo "mongodb+srv://sandbox.txmst.mongodb.net/mydb" --username m001-student
+m001-student
+m001-mongodb-basics
+
+CHAPTER 1 : INTRODUCTION
+
+CHAPTER 2 : EXPORTING, IMPORTING, AND QUERYING DATA
+
+show dbs // menampilkan seluruh database
+use sample_training // switched to db sample_training
+show collections // menampilkan seluruh collections di dalam db sample_training
+db.zips.find("state":"NY") // db merujuk ke database sample_training, zips adalah nama collection, find untuk menemukan semua dokumen dalam collection, {"state": "NY"} menemukan dokumen pada zip yang memiliki key "state" dan value "NY"
+db.<collection name>.find(<query>).count() // menghitung banyaknya data yang ditampilkan
+db.zips.find({"state": "NY", "city":"ALBANY"}).count(); // menghitung jumlah data yang memiliki keys and values : state=NY dan city=ALBANY
+db.zips.find({"state": "NY", "city":"ALBANY"}).pretty(); // menampilkan data dengan view yang lebih mudah dibaca
+
+CHAPTER 3 : CREATING AND MANIPULATING DOCUMENTS
+
+show dbs
+use sample_training
+
+Insert three test documents:
+
+db.inspections.insert([ { "test": 1 }, { "test": 2 }, { "test": 3 } ])
+
+Insert three test documents but specify the _id values:
+
+db.inspections.insert([{ "_id": 1, "test": 1 },{ "_id": 1, "test": 2 },
+                       { "_id": 3, "test": 3 }])
+
+Find the documents with _id: 1
+
+db.inspections.find({ "_id": 1 })
+
+Insert multiple documents specifying the _id values, and using the "ordered": false option.
+
+db.inspections.insert([{ "_id": 1, "test": 1 },{ "_id": 1, "test": 2 },
+                       { "_id": 3, "test": 3 }],{ "ordered": false })
+
+Insert multiple documents with _id: 1 with the default "ordered": true setting
+
+db.inspection.insert([{ "_id": 1, "test": 1 },{ "_id": 3, "test": 3 }])
+
+View collections in the active db
+
+show collections
+
+Switch the active db to training
+
+use training
+
+View all available databases
+
+show dbs
+
+UPDATE OPERATORS
+
+{"$inc": {"pop": 10, "<field2":<increment value>, ...}}  // menambahkan nilai pop yang sudah ada dengan 10, misalnya sebelumnya nilai pop = 5, maka menjadi 15
+{"$set": {"pop": 10, "<field2":<new value>, ...}}  // mengganti value dari sebelumnya misalnya 5 menjadi 10
+{"$set": {"pop": 10, "population": 20, <field2":<new value>, ...}}  // selain mengganti value dari sebelumnya misalnya 5 menjadi 10, juga menambahkan value baru dengan nama population dengan value 20
+{"$push" : {<field1>:<value1>,...}} / menambahkan elemen ke dalam field array
+
+Use the sample_training database as your database in the following commands.
+
+use sample_training
+
+Find all documents in the zips collection where the zip field is equal to "12434".
+
+db.zips.find({ "zip": "12534" }).pretty()
+
+Find all documents in the zips collection where the city field is equal to "HUDSON".
+
+db.zips.find({ "city": "HUDSON" }).pretty()
+
+Find how many documents in the zips collection have the city field equal to "HUDSON".
+
+db.zips.find({ "city": "HUDSON" }).count()
+
+Update all documents in the zips collection where the city field is equal to "HUDSON" by adding 10 to the current value of the "pop" field.
+
+db.zips.updateMany({ "city": "HUDSON" }, { "$inc": { "pop": 10 } })
+
+Update a single document in the zips collection where the zip field is equal to "12534" by setting the value of the "pop" field to 17630.
+
+db.zips.updateOne({ "zip": "12534" }, { "$set": { "pop": 17630 } })
+
+Update a single document in the zips collection where the zip field is equal to "12534" by setting the value of the "popupation" field to 17630.
+
+db.zips.updateOne({ "zip": "12534" }, { "$set": { "population": 17630 } })
+
+Find all documents in the grades collection where the student_id field is 151 , and the class_id field is 339.
+
+db.grades.find({ "student_id": 151, "class_id": 339 }).pretty()
+
+Find all documents in the grades collection where the student_id field is 250 , and the class_id field is 339.
+
+db.grades.find({ "student_id": 250, "class_id": 339 }).pretty()
+
+Update one document in the grades collection where the student_id is ``250`` *, and the class_id field is 339 , by adding a document element to the "scores" array.
+
+db.grades.updateOne({ "student_id": 250, "class_id": 339 },
+                    { "$push": { "scores": { "type": "extra credit",
+                                             "score": 100 }
+                                }
+                     })
+
+DELETING DOCUMENTS AND COLLECTIONS
+
+use sample_training
+
+Look at all the docs that have test field equal to 1.
+
+db.inspections.find({ "test": 1 }).pretty()
+
+Look at all the docs that have test field equal to 3.
+
+db.inspections.find({ "test": 3 }).pretty()
+
+Delete all the documents that have test field equal to 1.
+
+db.inspections.deleteMany({ "test": 1 })
+
+Delete one document that has test field equal to 3.
+
+db.inspections.deleteOne({ "test": 3 })
+
+Inspect what is left of the inspection collection.
+
+db.inspection.find().pretty()
+
+View what collections are present in the sample_training collection.
+
+show collections
+
+Drop the inspection collection.
+
+db.inspection.drop()
+
+EXERCISE CHAPTER 3 :
+Inserting New Documents - insert() and errors:
+
+1. Get a random document from a collection
+2. Copy this random document, and insert it back to the collection. Do you get
+   a "Duplicate Key" error?
+3. Insert that document into the collection without the _id field to get a
+   successfull insert. Did it work?
+
+
+Inserting New Documents - insert() order:
+
+1. Insert three test documents into the inspections collection
+   db.inspections.insert([{"test":1},{"test":2},{"test":3}])
+2. Insert the same three documents into the inspections collection. Did it
+   work? Why?
+3. Insert these three test documents into the inspections collection. Did it
+   work? Why?
+   db.inspections.insert([{"_id": 1, "test": 1},{"_id": 1, "test": 2},{"_id": 3,"test": 3}])
+4. Try the same insert as above but make it unordered.
+5. Try this command. Did it work? Why?
+   db.inspection.insert([{ "_id":1, "test": 1 },{ "_id": 3,"test": 3 }])
+
+
+Updating Documents  - mongo shell
+
+1. Find all documents in the zips collection where the zip field is equal to
+   "12434".
+2. Find all documents in the zips collection where the city field is equal to
+   "HUDSON".
+3. Find how many documents in the zips collection have the zip field is equal
+   to "HUDSON".
+4. Update all documents in the zips collection where the city field is equal
+   to "HUDSON" by adding 10 to the current value of the "pop" field.
+5. Update a single document in the zips collection where the zips field is
+   equal to "12534" by setting the value of the "pop" field to 17630.
+6. Update a single document in the zips collection where the zips field is
+   equal to "12534" by setting the value of the "population" field to 17630.
+7. Find all documents in the grades collection where the student_id is 151,
+   and the class_id field is 399.
+8. Find all documents in the grades collection where the student_id is 250,
+   and the class_id field is 399.
+9. Update one document in the grades collection where the student_id is 250,
+   and the class_id field is 399, by adding a document element to the "scores"
+   array.
+
+Practice Question:
+
+People often confuse New York City as the capital of New York state, when in
+reality the capital of New York state is Albany.
+
+Add a boolean field "capital?" to all documents pertaining to Albany NY, and
+New York, NY. The value of the field should be true for all Albany documents
+and false for all New York documents.
+
+
+Deleting Documents and Collections
+
+1. Look at all the documents in the inspections collection that have test field
+   equal to 1.
+2. Look at all the documents in the inspections collection that have test field
+   equal to 3.
+3. Delete all the documents from the inspections collection that have test
+   field equal to 1
+4. Delete one document from the inspections collection that has test field
+   equal to 3
+5. Inspect what is left of the inspection collection.
+6. View what collections are present in the sample_training collection.
+7. Drop the inspection collection
+
+CHAPTER 4 : ADVANCED CRUS OPERATIONS
+
+NOTES :
+MQL Operators:
+- Update Operators : $inc, $set, $unset  // Enable us to modify data in the database
+- Query Operators : Provide additional ways to locate data within the database
+$ has multiple uses
+- Precedes MQL Operators
+- Precedes Aggregation pipeline stages
+- Allows Access to Field Values
+
+Comparison Operators:
+- $eq == EQual to
+- $neq != Not EQual to
+- $gt > Greater Than
+- $lt < Lest Than
+- $gte >= Greater Than or Equal to
+- $lte <= Less Than or Equal to
+
+Switch to this database:
+
+use sample_training
+
+Find all documents where the tripduration was less than or equal to 70 seconds and the usertype was not Subscriber:
+
+db.trips.find({ "tripduration": { "$lte" : 70 },
+                "usertype": { "$ne": "Subscriber" } }).pretty()
+
+Find all documents where the tripduration was less than or equal to 70 seconds and the usertype was Customer using a redundant equality operator:
+
+db.trips.find({ "tripduration": { "$lte" : 70 },
+                "usertype": { "$eq": "Customer" }}).pretty()
+
+Find all documents where the tripduration was less than or equal to 70 seconds and the usertype was Customer using the implicit equality operator:
+
+db.trips.find({ "tripduration": { "$lte" : 70 },
+                "usertype": "Customer" }).pretty()
+
+
+LOGIC OPERATORS 
+$or
+$and
+$nor
+$not
+
+Explicit $and: 
+$and : diterapkan secara default jika tidak  menggunakan operator sama sekali
+contoh : Find which student ids are > 25 and < 100 in the sample_training.grades collection
+         {"$and":[{"student_id": {"$gt":25}}, {"student_id": {"$lt": 100}}]}
+
+Is the same as:
+
+{"student_id": {"$gt": 25}}, {"student_id": {"$lt": 100}}
+
+Better :
+
+{"student_id": {"$gt": 25, "$lt": 100}}
+
+Implicit $and :
+
+{"$or":[{"dst_airport": "KZN"}, {"src_airport" : "KZN"}]}
+
+and 
+
+{"$or": [{airplane:"CR2"}, {airplane:"A81"}]}
+
+{"$and : [{"$or":[{"dst_airport": "KZN"}, {"src_airport" : "KZN"}]}, {"$or": [{airplane:"CR2"}, {airplane:"A81"}]}]}
+ 
+In Summary :
+Logic operator allow us to be more granular in our search for data.
+Syntax:
+{"$<operator>": [{<clause1>}, {<clause2>}, ...]}
+Syntax for $not:
+{"$not": {<clause>}}
+
+$and is used as the default operator when an operator is not specified.
+Explicitly use $and when you need to include the same operator more than one in query.
+db.zips.find({"pop":{"$lt": 1000000, "$gt": 5000 }}).count()
+
+
+Expressive Query Operator :
+
+Switch to this database:
+
+use sample_training
+
+Find all documents where the trip started and ended at the same station:
+
+db.trips.find({ "$expr": { "$eq": [ "$end station id", "$start station id"] }
+              }).count()
+
+Find all documents where the trip lasted longer than 1200 seconds, and started and ended at the same station:
+
+db.trips.find({ "$expr": { "$and": [ { "$gt": [ "$tripduration", 1200 ]},
+                         { "$eq": [ "$end station id", "$start station id" ]}
+                       ]}}).count()
+
+
+ARRAY OPERATOR
+Example :
+Switch to this database:
+
+use sample_airbnb
+
+Find all documents with exactly 20 amenities which include all the amenities listed in the query array:
+
+db.listingsAndReviews.find({ "amenities": {
+                                  "$size": 20,
+                                  "$all": [ "Internet", "Wifi",  "Kitchen",
+                                           "Heating", "Family/kid friendly",
+                                           "Washer", "Dryer", "Essentials",
+                                           "Shampoo", "Hangers",
+                                           "Hair dryer", "Iron",
+                                           "Laptop friendly workspace" ]
+                                         }
+                            }).pretty()
+
+PROJECTION SYNTAX
+db.<collection>.find({<query>},{<projection>})
+1 - include the field
+0 - exlude the field
+Use only 1s or only 0s
+
+db.<collection>find({<query>},{<field1>:1, <field2>:1})
+or
+db.<collection>find({<query>},{<field1>:0, <field2>:0})
+
+exception:
+db.<collection>.find({<query>},{<field1>:1, "_id":0})
+
+EXAMPLE:
+Switch to this database:
+
+use sample_airbnb
+
+Find all documents with exactly 20 amenities which include all the amenities listed in the query array, and display their price and address:
+
+db.listingsAndReviews.find({ "amenities":
+        { "$size": 20, "$all": [ "Internet", "Wifi",  "Kitchen", "Heating",
+                                 "Family/kid friendly", "Washer", "Dryer",
+                                 "Essentials", "Shampoo", "Hangers",
+                                 "Hair dryer", "Iron",
+                                 "Laptop friendly workspace" ] } },
+                            {"price": 1, "address": 1}).pretty()
+
+Find all documents that have Wifi as one of the amenities only include price and address in the resulting cursor:
+
+db.listingsAndReviews.find({ "amenities": "Wifi" },
+                           { "price": 1, "address": 1, "_id": 0 }).pretty()
+
+Find all documents that have Wifi as one of the amenities only include price and address in the resulting cursor, also exclude ``"maximum_nights"``. **This will be an error:*
+
+db.listingsAndReviews.find({ "amenities": "Wifi" },
+                           { "price": 1, "address": 1,
+                             "_id": 0, "maximum_nights":0 }).pretty()
+
+Switch to this database:
+
+use sample_training
+
+Get one document from the collection:
+
+db.grades.findOne()
+
+Find all documents where the student in class 431 received a grade higher than 85 for any type of assignment:
+
+db.grades.find({ "class_id": 431 },
+               { "scores": { "$elemMatch": { "score": { "$gt": 85 } } }
+             }).pretty()
+
+Find all documents where the student had an extra credit score:
+
+db.grades.find({ "scores": { "$elemMatch": { "type": "extra credit" } }
+               }).pretty()
+
+
+
+ARRAY OPERATORS & SUB-DOCUMENT
+
+Example:
+use sample_training
+
+db.trips.findOne({ "start station location.type": "Point" })
+
+db.companies.find({ "relationships.0.person.last_name": "Zuckerberg" },
+                  { "name": 1 }).pretty()
+
+db.companies.find({ "relationships.0.person.first_name": "Mark",
+                    "relationships.0.title": { "$regex": "CEO" } },
+                  { "name": 1 }).count()
+
+
+db.companies.find({ "relationships.0.person.first_name": "Mark",
+                    "relationships.0.title": {"$regex": "CEO" } },
+                  { "name": 1 }).pretty()
+
+db.companies.find({ "relationships":
+                      { "$elemMatch": { "is_past": true,
+                                        "person.first_name": "Mark" } } },
+                  { "name": 1 }).pretty()
+
+db.companies.find({ "relationships":
+                      { "$elemMatch": { "is_past": true,
+                                        "person.first_name": "Mark" } } },
+                  { "name": 1 }).count()
+
+
+// Latitude decreases in value as you move west. How many trips in the sample_training.trips collection started at stations that are to the west of the -74 latitude coordinate?
+db.getCollection('trips').find({"start station location.coordinates.0":{"$lt":-74}}).count()
+
+// How many inspections from the sample_training.inspections collection were conducted in the city of NEW YORK?
+
+db.getCollection('inspections').find({"address.city":"NEW YORK"}).count() // 18279
+
+
+// The following queries will return the names and addresses of all listings from the sample_airbnb.listingsAndReviews collection where the first amenity in the list is "Internet"?
+db.getCollection('listingsAndReviews').find({"amenities.0":"Internet"})
+
+CHAPTER 5 INDEXING AND AGGREGATION FRAMEWORK
+
+db.getCollection('listingsAndReviews').aggregate([{"$match":{"amenities":"Wifi"}},{"$project":{"price":1,"address":1,"_id":0}}]).pretty()
+
+db.getCollection('listingsAndReviews').aggregate([{"$project":{"address":1, "_id":0}},{"$group":{"_id":"$address.country"}}])
+
+Switch to this database:
+
+use sample_airbnb
+
+Find all documents that have Wifi as one of the amenities. Only include price and address in the resulting cursor.
+
+db.listingsAndReviews.find({ "amenities": "Wifi" },
+                           { "price": 1, "address": 1, "_id": 0 }).pretty()
+
+Using the aggregation framework find all documents that have Wifi as one of the amenities``*. Only include* ``price and address in the resulting cursor.
+
+db.listingsAndReviews.aggregate([
+                                  { "$match": { "amenities": "Wifi" } },
+                                  { "$project": { "price": 1,
+                                                  "address": 1,
+                                                  "_id": 0 }}]).pretty()
+
+Find one document in the collection and only include the address field in the resulting cursor.
+
+db.listingsAndReviews.findOne({ },{ "address": 1, "_id": 0 })
+
+Project only the address field value for each document, then group all documents into one document per address.country value.
+
+db.listingsAndReviews.aggregate([ { "$project": { "address": 1, "_id": 0 }},
+                                  { "$group": { "_id": "$address.country" }}])
+
+Project only the address field value for each document, then group all documents into one document per address.country value, and count one for each document in each group.
+
+db.listingsAndReviews.aggregate([
+                                  { "$project": { "address": 1, "_id": 0 }},
+                                  { "$group": { "_id": "$address.country",
+                                                "count": { "$sum": 1 } } }
+                                ])
+
+
+SOAL :
+What room types are present in the sample_airbnb.listingsAndReviews collection?
+
+JAWABAN :
+
+db.getCollection('listingsAndReviews').aggregate([{ "$project": { "room_type": 1, "_id": 0 }},{ "$group": { "_id": "$room_type" } } ])
+
+What are the differences between using aggregate() and find()?
+- aggregate() can do what find() can and more
+- aggregate() allows us to compute and reshape data in the cursor
+
+
+// SORT & LIMIT 
+
+use sample_training
+
+db.zips.find().sort({ "pop": 1 }).limit(1)
+
+db.zips.find({ "pop": 0 }).count()
+
+db.zips.find().sort({ "pop": -1 }).limit(1)
+
+db.zips.find().sort({ "pop": -1 }).limit(10)
+
+db.zips.find().sort({ "pop": 1, "city": -1 })
+
+// SOAL : Which of the following commands will return the name and founding year for the 5 oldest companies in the sample_training.companies collection?
+// JAWAB : 
+db.companies.find({ "founded_year": { "$ne": null }},
+                  { "name": 1, "founded_year": 1 }
+                 ).sort({ "founded_year": 1 }).limit(5)
+
+ATAU 
+db.companies.find({ "founded_year": { "$ne": null }},
+                  { "name": 1, "founded_year": 1 }
+                 ).limit(5).sort({ "founded_year": 1 })
+
+// SOAL : In what year was the youngest bike rider from the sample_training.trips collection born?
+
+// JAWABAN :
+db.getCollection('trips').find({ "birth year": { "$ne": "" }},{ "name": 1, "birth year": 1 }).sort({ "birth year": 1 }).limit(5)
+
+
+// MATERI : INDEXES
+
+// SOAL : Jameela often queries the sample_training.routes collection by the src_airport field like this:
+db.routes.find({ "src_airport": "MUC" }).pretty()
+
+JAWABAN :
+db.routes.createIndex({ "src_airport": -1 })
+
+
+DATA MODELLING
+What is data modelling?
+a way to organize fields in a document to support your application performance and querying capabilities
+
+UPSERT
+It is used with the update operator, and needs to have its value specified every time that the update operator is called.
+
+    This is incorrect.
+
+    The upsert option only needs its value specified if you want to change the default false setting to true.
+
+By default upsert is set to false.
+
+    This is correct.
+
+    If the upsert option is not specified, then it will have the value of false by default.
+
+When upsert is set to true and the query predicate returns an empty cursor, the update operation creates a new document using the directive from the query predicate and the update predicate.
+
+    This is correct.
+
+    When upsert is set to true it can perform an insert if the query predicate doesn't return a matching document.
+
+When upsert is set to false and the query predicate returns an empty cursor then there will be no updated documents as a result of this operation.
+
+    This is correct.
+
+    When upsert is set to false an update will happen only when the query predicate is matched with a document from the collection.
+
+
+// SOAL : What actions are available to you via the Aggregation Builder in the Atlas Data Explorer?
+- A preview of the data in the pipeline at each selected stage.
+- Syntax for each selected aggregation stage.
+- Export pipeline to a programming language.
+
