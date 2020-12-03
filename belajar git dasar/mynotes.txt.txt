@@ -63,3 +63,10 @@ git push origin master
 
 
 https://zoom.us/j/7147808892 
+
+// MENGHAPUS BRANCH LOCAL DAN REMOTE 
+$ git branch -D <nama_branch_local_yang_akan_dihapus>
+$ git push origin --delete <nama_branch_remote_yang_akan_dihapus>
+untuk sinkronisasi branch, ketik perintah :
+$ git fetch -p
+
