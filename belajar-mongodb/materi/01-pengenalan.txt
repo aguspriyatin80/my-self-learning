@@ -1,0 +1,117 @@
+PERINTAH-PERINTAH DI MONGODB-SHELL
+
+MATERI 1 : PENGENALAN
+----------------------
+- mongodb merupakan free dan opensource database management system
+- mongodb merupakan database management system berbasis document
+- dikembangkan oleh perusahaan bernama 10gen tahun 2007
+- dirilis ke public tahun 2009
+- saat ini perusahaan 10gen sudah berganti nama menjadi MongoDB Inc
+- mongodb hampir mendukung semua bahasa pemrograman sebagai client-nya
+- mongodb tidak menggunakan SQL, namun menggunakan Javascript sebagai bahasa utama untuk manipulasi data
+- https://github.com/mongodb/mongo
+
+// Apa itu Document Oriented Database :
+- document oriented database merupakan sistem database yang digunakan untuk memanipulasi data dalam bentuk document (semi structured data)
+- biasanya document disimpan dalam bentuk JSON atau XML
+- document oriented database biasanya bertolak belakang dengan relational database
+- relational database biasanya menyimpan data dalam bentuk tabel, dan menyimpan relasinya di tabel lain
+- document oriented database biasanya menyimpan data dalam bentuk JSON atau XML, dan menyimpan relasinya sebagai embedded object di dalam document yang sama
+
+// Istilah Relational DB vs Document DB
+Relational DB (SQL)  VS Document DB (NoSQL)
+
+Database 	x 	Database
+Table 		x 	Collection
+Column		x	Field
+Row, Record	x	Document(JSON,XML, dan lain-lain)
+Join Table	x	Embedded Document, Reference
+SQL		x	Javascript(MongoDB)
+
+
+MATERI 2 : MENGINSTALL MONGODB
+----------------------------
+instalasi menggunakan docker
+- mongodb docker image : https://hub.docker.com/_/mongo
+- docker compose : https://github.com/ProgrammerZamanNow/belajar-mongodb/blob/master/mongodb/docker-compose.yml
+ 
+
+DATABASE: tempat menyimpan collection
+
+// melihat semua database
+> show databases
+
+// berpindah ke database belajar, jika belum ada otomatis membuat database belajar
+
+> use belajar
+switched to db belajar
+
+> show databases
+admin
+config
+local
+
+// database belajar belum bisa tampil, karena belum ada collection
+
+//Database Methods
+- db.dropDatabase()
+- db.getName()
+belajar
+
+- db.dropDatabase()
+{"ok":1}
+
+> db.getName()
+belajar // tetapi database tetap ada
+
+> db.hostInfo()
+> db.stats() // menampilkan data-data penting tentang database
+> db.version()
+
+MATERI : COLLECTION : tempat menyimpan dokumen (maksimum 16MB)
+
+// Database Methods untuk Collection
+db.getCollectionNames() -> mengambil semua nama collection
+db.crerateCollection(name) -> membuat collection baru
+db.getCollection(name) -> mendapatkan object collection
+db.<name> -> Sama dengan db.getCollection(<name>)
+db.getCollectionInfos() -> mendapat informasi semua collection
+
+// Collection Methods
+db.<collection>.find() -> mengambil semua document
+db.<collection>.count() -> mengambil jumlah dokumen
+db.<collection>.drop() -> menghapus collection
+db.<collection>.totalSize() -> mengambil total ukuran collection
+db.<collection>.stats() -> mengambil informasi statistik collection
+
+// examples:
+db.getCollection("contoh").find()
+db.contoh.find()
+db.contoh.count()
+db.contoh.totalSize()
+db.contoh.stats()
+db.contoh.drop()
+db.getCollectionNames()
+db.produk.drop()
+db.getCollectionNames()
+
+db.createCollection('customers');
+db.createCollection('products');
+db.createCollection('orders');
+
+MATERI : DATA MODEL
+
+// Embedded vs Reference
+Gunakan Embedded jika:
+- Antar dokumen saling ketergantungan
+- Tidak bisa langsung melakukan perubahan ke embedded dokumen
+- Embedded dokumen selalu dibutuhkan ketika mengambil data dokumen
+
+Gunakan Reference jika:
+- Antar dokumen bisa berdiri sendiri dan tidak terlalu ketergantungan satu sama lain
+- Bisa melakukan manipulasi data langsung terhadap reference dokumen
+- Referene dokumen tidak selalu dibutuhkan saat mengambil dokumen
+
+
+
+
