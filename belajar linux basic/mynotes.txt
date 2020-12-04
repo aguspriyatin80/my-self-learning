@@ -80,3 +80,5 @@ $ git push origin --delete <nama_branch_remote_yang_akan_dihapus>
 untuk sinkronisasi branch, ketik perintah :
 $ git fetch -p
 
+// CARA INSTALL ELASTICSEARCH
+https://jaranguda.com/cara-install-dan-konfigurasi-elk-7-x-stack-ubuntu-20-04/
