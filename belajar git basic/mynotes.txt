@@ -1,0 +1,72 @@
+How does internet works?
+
+- Review belajar kemarin
+- GIT Flow
+  source code management : 
+  menulis kode agar bisa kolaborasi dengan team.
+
+  caranya :
+  git init
+  git status
+	
+  git remote add origin https://gitlab.com/agus_priyatin80/basic-javascript.git
+   git remote -v (lihat link remote kemana)
+   git pull origin master
+   touch index.js
+   touch index.html
+   git add index.js
+   git commit -m "push index.js"
+   git push origin master
+   (biasanya akan keluar jendela login, masukkan username dan password dengan benar)
+   touch style.css
+   git add .
+   git status
+   git commit -m "push 2 file yaitu style.css dan index.html"
+   git push origin master
+   
+cara cepat:
+   git clone https://gitlab.com/agus_priyatin80/basic-javascript.git
+   
+menjalankan terminal di VSC
+view : terminal
+
+catatan : pindah ke folder sebelumnya cd ..
+
+TUGAS :
+https://gitlab.com/vincent.guizot/basic-javascript
+
+   
+   
+   
+//catatan :
+  bila minta login maka login dulu :
+   git config --global user.email "aguspriyatin80@gmail.com"
+   git config --global user.name "agus_priyatin80"
+
+
+  * buat akun github dan gitlab dengan menggunakan email yang sama
+    
+
+ERRORS :
+
+  git remote add origin [//your github url]
+
+//pull those changes
+
+git pull origin master 
+
+// or optionally, 'git pull origin master --allow-unrelated-histories' if you have initialized repo in github and also committed locally
+
+//now, push your work to your new repo
+
+git push origin master
+
+
+https://zoom.us/j/7147808892 
+
+// MENGHAPUS BRANCH LOCAL DAN REMOTE 
+$ git branch -D <nama_branch_local_yang_akan_dihapus>
+$ git push origin --delete <nama_branch_remote_yang_akan_dihapus>
+untuk sinkronisasi branch, ketik perintah :
+$ git fetch -p
+
