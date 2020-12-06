@@ -29,11 +29,11 @@ Berikut perbandingan menggunakan nodejs dengan nodejs+express
 // var express = require('express');
 // var app = express();
 // var path = require('path');
-//viewed at http://localhost:8000
-// app.get("/", function(req, res) {
+// viewed at http://localhost:8000
+
+// app.get('/', function (req, res) {
 //     res.sendFile(path.join(__dirname + "/index.html"));
-// });
-// Bisa juga menggunakan kode ini:
+// })
 // app.get('/', (req,res)=>{
 //     res.send(<p>Homepage</p>);
 // })
@@ -58,3 +58,19 @@ yang lebih singkat.
 */
 
 // 2# ROUTING
+/*
+1) buat folder views dan buat buat file index.html, add-item.html, dan error.html
+2) Tambahkan di dalam file app.js kode berikut ini:
+
+// app.get('/', (req, res) => {
+//     res.sendFile('./views/index.html', { root: __dirname })
+// })
+
+// app.get('/add-item', (req, res) => {
+//     res.sendFile('./views/add-item.html', { root: __dirname })
+// })
+
+// app.get((req, res) => {
+//     res.sendFile('./views/error.html', { root: __dirname })
+// })
+*/
