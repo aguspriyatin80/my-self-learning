@@ -82,3 +82,8 @@ $ git fetch -p
 
 // CARA INSTALL ELASTICSEARCH
 https://jaranguda.com/cara-install-dan-konfigurasi-elk-7-x-stack-ubuntu-20-04/
+
+// TIDAK BISA MENJALANKAN VIDEO DI udemy.com (dukungan HTML5)
+$ sudo apt install libavcodec-extra58 libavcodec-extra
+
+
