@@ -1,3 +1,17 @@
+GAME UNTUK BELAJAR :
+- https://flexboxfroggy.com/#id
+- http://christianrubiales.com/flexboxfroggy-no-hints/ (NO HINTS)
+LEVEL 24:
+DUA BARIS
+flex-flow: column-reverse wrap-reverse;
+place-content: space-between center; 
+TIGA BARIS
+flex-flow: column-reverse wrap-reverse;
+justify-content: center;
+align-content: space-between;
+
+A. BAGIAN 1 : INTRODUCTION 
+
 01. INTRODUCTION
 
 Flexbox : Flexible Box Module -> one-dimensional layout model 
@@ -9,4 +23,135 @@ Layout modes:
 - Inline, for text
 - Table, for two-dimensional table data
 - Positioned, for explicit position of an element
+Why Flexbox?
+- a lot of flexibility
+- arrange items
+- spacing
+- alignment
+- order of items
+- bootstrap 4 is built on top of the flex layout.
+
+02. TERMINOLOGY
+- Flex Container
+- Flex Items
+- Main Axis
+- Cross Axis
+
+B. BAGIAN 2 : FLEX  CONTAINER
+
+03. FLEX CONTAINER PROPERTIES
+- display (MANDATORY)
+- flex-direction
+- flex-wrap
+- flex-flow
+- justify-content
+- align-items
+- align-content
+
+04. FLEX DISPLAY
+- display: flex; // menampilkan item secara horizontal
+- display: inline-flex; // container menyesuaikan lebar content
+
+05. FLEX DIRECTION 
+- flex-direction: row; // nilai default yang menampilkan item secara horizontal
+- flex-direction: row-reverse; // menampilkan item secara horizontal dengan urutan terbalik
+- flex-direction: column; // menampilkan item secara vertikal
+- flex-direction: column-reverse; // menampilkan item secara vertikal dengan urutan terbalik
+
+06. FLEX WRAP
+- flex-wrap: wrap; // secara otomatis content akan melipat ke bawah jika layar browser dipersempit
+- flex-wrap: nowrap; // nilai default container kebalikan dari wrap 
+- flex-wrap: wrap-reverse; // secara otomatis content akan melipat ke atas jika layar browser dipersempit
+
+- height: 400px; menetapkan tinggi container;
+- flex-wrap: column; // secara otomatis akan melipat ke samping kanan jika content tidak muat di container
+- flex-wrap: column-reverse; // secara otomatis akan melipat ke samping kiri jika content tidak muat di container
+
+07. FLEX FLOW (Dapat menjalankan property flex-direction dan flex-wrap sekaligus / Shorthand)
+- flex-flow: <flex-direction> <flex-wrap>;
+- flex-wrap: column-reverse wrap-reverse;
+
+08. JUSTIFY CONTENT 
+- justify-content: flex-start; // nilai default perataan horizontal, rata kiri 
+- justify-content: flex-end; // perataan horizontal, rata kanan 
+- justify-content: center; // perataan horizontal, rata kanan 
+- justify-content: space-between; // jarak antar konten akan sama, tidak ada ruang sebelum konten pertama dan setelah konten terakhir
+- justify-content: space-around; // jarak antar konten akan sama, tetapi ada ruang sebelum konten pertama dan setelah konten terakhir
+- justify-content: space-evenly; // jarak antar konten akan sama dengan lebar ruang sebelum konten pertama dan setelah konten terakhir sama
+
+- flex-direction: column;
+- height: 800px;
+- justify-content: flex-start; // nilai default / top vertically
+- justify-content: flex-end; // posisi item akan ada di bawah / bottom vertically
+
+09. ALIGN ITEMS 
+- height: 800px;
+- align-items: stretch; // default value fulling container height
+- align-items: flex-start; // posisi item di atas / top vertically dan proporsional dengan content
+- align-items: flex-end; // posisi item di bawah / bottom vertically dan proporsional dengan content 
+- align-items: center; // posisi item di tengah / center vertically dan proporsional dengan content 
+- align-items: baseline; // posisi teks akan selalu sejajar meskipun height masing-masing item berbeda;
+
+
+10. ALIGN CONTENT 
+- flex-wrap: wrap;
+- align-content: stretch; // default value
+- height: 800px;
+- align-content: flex-start; // content at the top
+- align-content: flex-end; // content at the bottom
+- align-content: center; // content at the middle 
+- align-content: space-between; // dipisahkan jarak antar baris 
+- align-content: space-around; // dipisahkan jarak antar baris dan ada ruang sebelum dan sesudahnya
+
+
+C. BAGIAN 3: FLEX ITEM 
+
+11. FLEX ITEM PROPERTIES 
+- order
+- flex-grow
+- flex-shrink
+- flex-basis 
+- flex 
+- align-self
+
+12. ORDER PROPERTIES
+- order: 0; // value default 
+- order: 1; // item tersebut akan berada di posisi akhir
+- order: 2; // item tersebut akan berada di posisi setelah order 1
+- jika ada 2 item yang memiliki order yang sama, maka urutannya sesuai dengan urutan pembuatannya
+
+13. FLEX GROW 
+- flex-grow: 0; //  value default, tidak ada efek grow 
+- flex-grow: 1; // item ini akan melebar menggunakan sisa space container 
+- jika ada 2 item yang diset flex-grow:1 maka lebarnya akan dibagi 2 dari sisa space container
+- jika salah satu dari 2 item yang diset flex-grow:3 maka lebarnya 2/3 dari item yang diset flex-grow:1
+- jika flex-grow:1 diset di container, maka seluruh item akan melebar merata dengan ukuran sama memenuhi lebar container
+
+14. FLEX SHRINK 
+- flex-shrink:1; // value default 
+- flex-shrink:0; // isi/teks item tidak melipat ke bawah (nowrap)
+- flex-shrink:4; // isi/teks item akan melipat ke bawah lebih cepat dari item lainnya
+
+15. FLEX BASIS 
+- flex-basis: auto; // value default;
+- flex-basis: 400px; // lebarnya tepat 400px, item lainnya menyesuaikan, bisa pakai px,%, or relative units.
+
+16. FLEX
+- Shorthand for flex-grow, flex-shrink, and flex-basis;
+- flex: <flex-grow> <flex-shrink> <flex-basis>;
+
+17. ALIGN SELF 
+- height: 300px; // set height pada containernya 
+- align-self: auto; // value default 
+- align-self: stretch; // lebar/tingginya mengikuti container yang secara defaultnya stretch 
+- align-self: flex-start; // posisi item di atas dan tidak stretch
+- align-self: flex-end; // posisi item di bawah dan tidak stretch
+- align-self: center; // posisi item di tengah dan tidak stretch 
+- overrides the align-items value of the flex container 
+
+D. BAGIAN 4: PRACTICAL USE CASES 
+18. LIST OF PRACTICAL USE CASES 
+- navbar
+- centering item
+- holy grail layout 
 
