@@ -31,10 +31,25 @@ SQL		x	Javascript(MongoDB)
 
 MATERI 2 : MENGINSTALL MONGODB
 ----------------------------
-instalasi menggunakan docker
+instalasi mudah dengan melihat dokumentasi di docs.mongodb.com
+jika instalasi menggunakan docker:	
 - mongodb docker image : https://hub.docker.com/_/mongo
 - docker compose : https://github.com/ProgrammerZamanNow/belajar-mongodb/blob/master/mongodb/docker-compose.yml
  
+
+MATERI 3 : MONGODB CLIENT
+- MongoDB menyediakan aplikasi mongo client berupa command line interface untuk terkoneksi ke mongoDB server dengan nama mongo shell
+- Mongo shell sangat bermanfaat saat kita tidak harus konek ke server pake GUI
+- Mongo shell menggunakan bahasa pemrograman javascript
+- cara menggunakan mongo shell :
+$ mongo --host localhost --port 27017
+atau hanya perintah mongo secara default portnya 27017
+mongoDB clien versi GUI :
+- MongoDB Compass
+- JetBrains DataGrip
+- MongoDB for Visual Studio Code : 
+- Robo 3T
+
 
 DATABASE: tempat menyimpan collection
 
