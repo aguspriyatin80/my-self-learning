@@ -1,7 +1,7 @@
 PERINTAH-PERINTAH DI MONGODB-SHELL
 
 MATERI 1 : PENGENALAN
-----------------------
+=====================
 - mongodb merupakan free dan opensource database management system
 - mongodb merupakan database management system berbasis document
 - dikembangkan oleh perusahaan bernama 10gen tahun 2007
@@ -30,14 +30,26 @@ SQL		x	Javascript(MongoDB)
 
 
 MATERI 2 : MENGINSTALL MONGODB
-----------------------------
+==============================
 instalasi mudah dengan melihat dokumentasi di docs.mongodb.com
 jika instalasi menggunakan docker:	
 - mongodb docker image : https://hub.docker.com/_/mongo
 - docker compose : https://github.com/ProgrammerZamanNow/belajar-mongodb/blob/master/mongodb/docker-compose.yml
  
+// CARA INSTALL MONGODB MENGGUNAKAN DOCKER
+sebelum install docker, install dulu curl di ubuntu dengan cara :
+$ sudo apt update
+$ sudo apt install curl
+
+kemudian install docker dengan cara: 
+$ sudo snap install docker
+panduan lengkap install docker di : https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+
+selanjutnya install docker-compose selengkapnya di :
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-id
 
 MATERI 3 : MONGODB CLIENT
+=========================
 - MongoDB menyediakan aplikasi mongo client berupa command line interface untuk terkoneksi ke mongoDB server dengan nama mongo shell
 - Mongo shell sangat bermanfaat saat kita tidak harus konek ke server pake GUI
 - Mongo shell menggunakan bahasa pemrograman javascript
@@ -51,27 +63,34 @@ mongoDB clien versi GUI :
 - Robo 3T
 
 
-DATABASE: tempat menyimpan collection
+MATERI 4: DATABASE
+
+- Database adalah tempat untuk menyimpa collection
+- Semua collection harus disimpan di database
+- Biasanya database digunakan untuk memisahkan data secara logical per aplikasi, artinya biasanya satu aplikasi akan memiliki satu database
+- Jarang sekali kita menggunakan satu database untuk beberapa aplikasi 
+Membuat database :
+- Kita tidak perlu secara eksplisit membuat database
+- MongoDB akan secara otomatis membuatkan database sesuai dengan nama database yang kita pilih
+- Untuk memilih nama database, kita bisa menggunakan perintah use diikuti nama database
 
 // melihat semua database
 > show databases
 
 // berpindah ke database belajar, jika belum ada otomatis membuat database belajar
-
 > use belajar
 switched to db belajar
-
+// menampilkan semua database
 > show databases
 admin
 config
 local
+// database belajar belum tampil, akan tampil jika sudah membuat collection di dalamnya
 
-// database belajar belum bisa tampil, karena belum ada collection
 
-//Database Methods
-- db.dropDatabase()
-- db.getName()
-belajar
+//DATABASE METHODS
+- db.dropDatabase() -> menghapus database
+- db.getName() -> mengambil nama database
 
 - db.dropDatabase()
 {"ok":1}
@@ -79,9 +98,9 @@ belajar
 > db.getName()
 belajar // tetapi database tetap ada
 
-> db.hostInfo()
-> db.stats() // menampilkan data-data penting tentang database
-> db.version()
+> db.hostInfo() -> mengambil informasi host tempat mongodb
+> db.version() -> mengambil versi database
+> db.stats() -> mengambil statistik penggunaan database / menampilkan data-data penting tentang database
 
 MATERI : COLLECTION : tempat menyimpan dokumen (maksimum 16MB)
 

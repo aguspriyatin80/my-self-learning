@@ -86,4 +86,16 @@ https://jaranguda.com/cara-install-dan-konfigurasi-elk-7-x-stack-ubuntu-20-04/
 // TIDAK BISA MENJALANKAN VIDEO DI udemy.com (dukungan HTML5)
 $ sudo apt install libavcodec-extra58 libavcodec-extra
 
+// CARA INSTALL MONGODB MENGGUNAKAN DOCKER
+sebelum install docker, install dulu curl di ubuntu dengan cara :
+$ sudo apt update
+$ sudo apt install curl
+
+kemudian install docker dengan cara: 
+$ sudo snap install docker
+panduan lengkap install docker di : https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+
+selanjutnya install docker-compose selengkapnya di :
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-id
+
 
