@@ -1,0 +1,13 @@
+ERROR: Invariant Violation: Module RCTEventEmitter is not a registered callable module (calling receiveTouches)
+SOLVING: 
+cd android
+./gradlew clean
+
+
+ERROR : Failed to save 'App.js': Insufficient permissions. Select 'Retry as Sudo' to retry as superuser.
+
+SOLVING :
+sudo chown -c -R $USER:$USER (project folder)
+
+
+

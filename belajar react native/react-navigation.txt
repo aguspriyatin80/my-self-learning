@@ -1,0 +1,135 @@
+01. INTRODUCTION AND SET UP
+// MENGGUNAKAN EXPO
+# npm install expo-cli --global
+# expo init ReactNative-Navigation
+# expo start
+// jalankan Android Virtual Device Manager, tekan a untuk menjalankan App di emulator
+atau akses http://localhost:19006/ untuk menjalankan di browser
+
+02. DRAWER Navigation
+// masuk ke folder aplikasi (ReactNative-Navigation), Install Dependencies
+# npm install @react-navigation/native
+# expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+# npm install @react-navigation/drawer
+
+// buat folder Navigations dan file DrawerNavigation.js di dalamnya, berikut kodenya:
+
+import * as React from 'react';
+import {View, StyleSheet, ScrollView, Text} from 'react-native';
+
+import { 
+    createDrawerNavigator, 
+    DrawerContentScrollView, 
+    DrawerItemList, 
+    DrawerItem} 
+    from '@react-navigation/drawer';
+
+function CustomDrawerContent(props) {
+    return(
+        <ScrollView style={styles.container}>
+            <View style={styles.drawerHeader}>
+                <View>
+                    <Text style={styles.drawerHeaderText}>Drawer Menu</Text>
+                </View>
+            </View>
+            <DrawerContentScrollView {...props}>
+                <DrawerItemList {...props} />
+                <DrawerItem
+                    label="Close drawer"
+                    onPress={()=> props.navigation.closeDrawer()}
+                    />
+            </DrawerContentScrollView>
+        </ScrollView>
+    )
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex:1,
+    },
+    drawerHeader: {
+        backgroundColor: '#03cafc',
+        height: 150,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        flexDirection: 'row'
+    },
+    drawerHeaderText: {
+        color: 'white',
+        fontSize: 24,
+        fontWeight: 'bold',
+    }
+})
+export default function DrawerNavigation() {
+    return (
+        <View>
+            <Text>Teks</Text>
+        </View>
+    )
+}
+
+// buat folder Screens sejajar dengan App.js dan isi file Home.js, berikut kodenya:
+
+import React from 'react';
+import {View, Text, StyleSheet, Button} from 'react-native';
+
+export default function Home({navigation}) {
+    return (
+        <View>
+            <View>
+                <Text>Home is here</Text>
+            </View>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    content: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#03cafc',
+    },
+    text: {
+        fontSize: 20,
+        color: '#ffffff',
+        fontWeight: '800',
+    }
+})
+
+// buat file Contact.js di dalam folder Screens, berikut kodenya:
+import React from 'react';
+import {View, Text, StyleSheet, Button } from 'react-native';
+
+export default function Contact({navigation}) {
+    return (
+        <View>
+            <View>
+                <Text>Contact is here</Text>
+                <Button title="Go Back" onPress={() => navigation.goBack()} />
+            </View>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    content: {
+        flex:1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#c203fc'
+    },
+    text: {
+        fontSize: 20,
+        color: '#ffffff',
+        fontWeight: 800,
+    }
+})
+
