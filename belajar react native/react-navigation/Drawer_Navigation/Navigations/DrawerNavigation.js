@@ -16,21 +16,29 @@ import {
 
 function CustomDrawerContent(props) {
     return(
-        <ScrollView style={styles.container}>
+        <ScrollView>
+        
+    
+    
+        <View style={styles.container}>
+                    
+
             <View style={styles.drawerHeader}>
                 <View>
                 <Ionicons name="person" style={styles.fotoProfile} size={80} color="#900" />
                     <Text style={styles.drawerHeaderText}> Drawer Menu</Text>
                 </View>
             </View>
-            <DrawerContentScrollView {...props}>
                 <DrawerItemList {...props} />
                 <DrawerItem
-                    icon={()=> <Icon name="close" size={20}/>}
-                    label="Close drawer"
-                    onPress={()=> props.navigation.closeDrawer()}
-                    />
+    icon={()=> <Icon name="close" size={25} label="close" />}
+    onPress={()=> props.navigation.closeDrawer()}
+   
+    label="Close"
+    />
+            <DrawerContentScrollView {...props}>
             </DrawerContentScrollView>
+        </View>
         </ScrollView>
     )
 }
@@ -55,6 +63,11 @@ function MyDrawer() {
 const styles = StyleSheet.create({
     container: {
         flex:1,
+        marginTop: 50,
+        top: 10,
+
+        
+
     },
     drawerHeader: {
         backgroundColor: '#03cafc',
@@ -62,7 +75,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     drawerHeaderText: {
         color: 'white',
