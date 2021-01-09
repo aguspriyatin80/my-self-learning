@@ -1,0 +1,50 @@
+h : panah kiri
+j : panah atas
+k : panah bawah
+l : panah kanan
+w : memindahkan kursor ke awal kata ke arah kanan
+e : memindahkan kursos ke akhir kata ke arah kanan
+b : memindahkan kursor ke awal kata ke arah kiri
+$ : menavigasi ke akhir baris
+0 : menavigasi ke awal baris 
+
+navigasi antar baris:
+pindah ke baris ketiga,
+cara 1: - masuk ke mode command dengan : kemudian ketik 3
+cara 2: - di mode normal, ketik 3gg
+
+navigasi ke awal file:
+ketik gg
+navigasi ke akhir file:
+ketik G 
+
+untuk masuk ke mode INSERT, ketik :
+- i : insert sebelum kursor
+- a : insert sesudah kursor 
+- I : insert di awal baris
+- A : insert di akhir baris
+
+- o (bukan nol) : insert membuat baris baru ke bawah baris
+- O (huruf O kapital) : insert membuat baris baru ke atas baris
+
+MENGUBAH DAN MENGHAPUS
+
+pada mode normal, 
+- tekan tombol x untuk menghapus satu karakter di depan kursor
+- tekan tombol X, untuk menghapus satu karakter di belakang kursor
+
+MENGHAPUS BEBERAPA KARKATER SEKALIGUS
+- menghapus satu kata ke depan, tekan tombol d+navigasi
+- misal dw, maka akan menghapus satu kata ke depan
+- dd :  menghapus satu baris
+- D : menghapus seluruh karakter di belakang kursor
+
+MENGGANTI
+- r : mengganti satu karakter (replace)
+- c+navigasi : mengganti beberapa karakter sekaligus (satu kata)
+- misal cw: mengganti satu kata ke depan
+
+UNDO & REDO
+- u : UNDO
+- redo : Ctrl+r
+

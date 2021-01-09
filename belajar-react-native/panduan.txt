@@ -1,0 +1,11 @@
+1) buat aplikasi baru dengan perintah :
+    $ react-native init NamaAplikasi
+2) buka terminal baru, jalankan perintah :
+    $ npm start
+3) buka terminal satu lagi, jalankan perintah :
+    $ npx react-native run-android
+    // jika terjadi error, ubah versinya dengan cara edit file di folder android/gradle/gradle-wrapper-properties
+    // edit baris : 
+        distributionUrl=https\://services.gradle.org/distributions/gradle-6.2-all.zip
+    // menjadi :
+        distributionUrl=https\://services.gradle.org/distributions/gradle-6.4-all.zip    

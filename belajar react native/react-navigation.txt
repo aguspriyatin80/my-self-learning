@@ -6,7 +6,7 @@
 // jalankan Android Virtual Device Manager, tekan a untuk menjalankan App di emulator
 atau akses http://localhost:19006/ untuk menjalankan di browser
 
-02. DRAWER Navigation
+02. DRAWER NAVIGATION
 // masuk ke folder aplikasi (ReactNative-Navigation), Install Dependencies
 # npm install @react-navigation/native
 # expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
@@ -132,4 +132,288 @@ const styles = StyleSheet.create({
         fontWeight: 800,
     }
 })
+
+03. STACK NAVIGATION
+1) jalankan perintah :
+$ react-native init Stack_Navigation
+2) buka tab terminal baru, jalankan perintah: 
+$ npx react-native run-android
+// jika terjadi error seperti ini :
+BUILD FAILED in 18s
+error Failed to install the app. Make sure you have the Android development environment set up: https://reactnative.dev/docs/environment-setup. Run CLI with --verbose flag for more details.
+Error: Command failed: ./gradlew app:installDebug -PreactNativeDevServerPort=8081
+java.lang.NoClassDefFoundError: Could not initialize class org.codehaus.groovy.vmplugin.v7.Java7
+// maka edit file:
+   /home/agus/Documents/github/my self learning/belajar react native/react-navigation/Stack_Navigation/android/gradle/wrapper/gradle-wrapper.properties
+// ubah versinya baris ini :
+   distributionUrl=https\://services.gradle.org/distributions/gradle-6.2-all.zip
+// menjadi versi di atasnya / di bawahnya, kemudian jalankan lagi dan seterusnya, sampai tidak terjadi error, misalnya menjadi :
+   distributionUrl=https\://services.gradle.org/distributions/gradle-6.4-all.zip
+3) jalankan perintah :
+$ npm install @react-navigation/native
+$ npm install @react-navigation/stack
+$ npm install react-native-safe-area-context
+$ npm install react-native-gesture-handler
+$ npm install react-native-screens
+$ npm install @react-native-community/masked-view
+
+4) ketik kode berikut ini pada file App.js
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+
+//Components
+// import DrawerNavigation from './Navigators/DrawerNavigation';
+import StackNavigation from './Navigators/StackNavigation';
+// import BottomTabNavigation from './Navigators/BottomTabNavigation';
+
+export default function App() {
+  return(
+    <StackNavigation />
+  )
+}
+
+5)  Buat folder Navigations dan buat file StackNavigation.js berikut kodenya:
+
+import * as React from 'react';
+import {View, Button, Text, Animated} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+
+function Home({navigation}) {
+    return(
+        <View
+            style={{
+                flex:1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'blue',
+            }}
+        >
+            <Text
+                style={{
+                    fontSize: 20,
+                    color: '#ffffff',
+                    fontWeight: '800',
+                }}
+            > Home is here!</Text>
+            <Button 
+                title='Go to Contact'
+                onPress={()=> navigation.navigate('Contact')}
+            />
+        </View>
+    )    
+}
+
+function Contact({navigation}) {
+    return(
+        <View
+            style={{
+                flex:1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'green',
+            }}
+        >
+            <Text
+                style={{
+                    fontSize: 20,
+                    color: '#ffffff',
+                    fontWeight: '800',
+                }}
+            > Contact is here!</Text>
+            <Button 
+                title='Go to About'
+                onPress={()=> navigation.navigate('About')}
+            />
+        </View>
+    )    
+}
+
+function About({navigation}) {
+    return(
+        <View
+            style={{
+                flex:1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#48d969',
+            }}
+        >
+            <Text
+                style={{
+                    fontSize: 20,
+                    color: '#ffffff',
+                    fontWeight: '800',
+                }}
+            > About is here!</Text>
+            <Button 
+                title='Go to Home'
+                onPress={()=> navigation.navigate('Home')}
+            />
+        </View>
+    )    
+}
+
+const Stack = createStackNavigator();
+
+function MyStack() {
+    return(
+        <Stack.Navigator>
+            <Stack.Screen
+                name='Home'
+                component={Home}
+                options={{
+                    headerTintColor: 'white',
+                    headerStyle:{backgroundColor:'red'}
+                }}
+            >
+            </Stack.Screen>
+            <Stack.Screen
+                name='Contact'
+                component={Contact}
+            >
+            </Stack.Screen>
+            
+            <Stack.Screen
+                name='About'
+                component={About}
+            >
+            </Stack.Screen>            
+        </Stack.Navigator>
+    )
+}
+
+export default function StackNavigation() {
+    return (
+        <NavigationContainer>
+            <MyStack />
+        </NavigationContainer>
+    )
+}
+
+
+04) BOTTOM TAB NAVIGATION
+$ npm install @react-navigation/stack
+$ npm install @react-navigation/bottom-tabs
+
+// ketik kode berikut ini pada file App.js
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import 'react-native-gesture-handler';
+
+
+//Components
+// import DrawerNavigation from './Navigators/DrawerNavigation';
+import StackNavigation from './Navigators/StackNavigation';
+// import BottomTabNavigation from './Navigators/BottomTabNavigation';
+
+export default function App() {
+  return(
+   //  <StackNavigation />
+    <BottomTabNavigation />
+  )
+}
+
+// buat file BottomTabNavigation.js di folder Navigators, berikut kodenya:
+
+import * as React from 'react';
+import {View, Button, Text} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+function Home() {
+    return (
+        <View
+            style={{
+                flex:1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#c3cafc'
+            }}
+        >
+            <Text 
+                title='Go Back'
+                onPress={()=> navigation.goBack()}
+            >Home is here!</Text>
+
+        </View>
+    )
+}
+function Contact({navigation}) {
+    return (
+        <View
+            style={{
+                flex:1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#c203fc'
+            }}
+        >
+            <Text 
+                title='Go Back'
+                onPress={()=> navigation.goBack()}
+            >Contact is here!</Text>
+            <Button title="Go Back" onPress={()=>navigation.goBack()} />
+        </View>
+    )
+}
+
+
+function About({navigation}) {
+    return (
+        <View
+            style={{
+                flex:1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#48d969'
+            }}
+        >
+            <Text 
+                title='Go Back'
+                onPress={()=> navigation.goBack()}
+            >About is here!</Text>
+            <Button title="Go Back" onPress={()=>navigation.goBack()} />
+        </View>
+    )
+}
+
+const Tab = createBottomTabNavigator();
+
+const MyTabs = () => {
+    return (
+        <Tab.Navigator
+            initialRouteName='Home'
+            tabBarOptions={{
+                activeTintColor:'#e91e63',
+            }}
+        >
+        <Tab.Screen
+            name='Home'
+            component={Home}
+        />
+        <Tab.Screen
+            name='Contact'
+            component={Contact}
+        />
+        <Tab.Screen
+            name='About'
+            component={About}
+        />
+
+        </Tab.Navigator>
+    )
+}
+
+export default function BottomTabNavigation() {
+    return (
+        <NavigationContainer>ss
+            <MyTabs />
+        </NavigationContainer>
+    )
+}
+
+05) TOP BAR NAVIGATION
+$ npm install @react-navigation/material-top-tabs react-native-tab-view
+$ npm install react-native-reanimated
 
