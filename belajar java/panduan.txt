@@ -1,0 +1,71 @@
+URUTAN REFERENSI BELAJAR :
+1. w3schools.com
+   
+   HARI KE-1 (Kamis, 14 Januari 2020):
+   introduction : https://www.w3schools.com/java/java_oop.asp
+   object : https://www.w3schools.com/java/java_classes.asp
+   constructors : https://www.w3schools.com/java/java_constructors.asp
+   this keyword : https://www.w3schools.com/java/ref_keyword_this.asp
+   Inheritence : https://www.w3schools.com/java/java_inheritance.asp
+
+   HARI KE-2 (Jumat, 15 Januari 2020)
+   super keyword : https://www.javatpoint.com/super-keyword
+   Polymorphism (Overriding and Overloading) : 
+   https://www.w3schools.com/java/java_polymorphism.asp
+   https://www.javatpoint.com/method-overloading-in-java
+   https://www.javatpoint.com/method-overriding-in-java
+
+
+A. INSTALASI JAVA 
+sumber: https://www.guru99.com/how-to-install-java-on-ubuntu.html)
+
+1)remove the OpenJDK/JRE from the system. 
+$ sudo apt-get purge openjdk-\*  
+
+2)mengecek arsistektur sistem operasi
+$ file /sbin/init 
+
+3)download java di : https://www.oracle.com/java/technologies/javase-downloads.html sesuaikan dengan arsitektur sistem operasi
+
+4)masuk ke folder dimana file download tadi berada, ketik perintah :
+$ sudo tar -xvf jdk-15.0.1_linux-x64_bin.tar.gz
+$ sudo nano /etc/profile
+
+5)tambahkan kode berikut di bagian paling bawah
+JAVA_HOME=/home/agus/Downloads/installers/jdk-15.0.1/jdk1.8.0
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+export JAVA_HOME
+export PATH
+
+6)reload environment, dengan perintah:
+$ . /etc/profile
+
+7)mengizinkan ubuntu mengetahui lokasi JDK/JRE
+$ sudo update-alternatives --install "/usr/bin/java" "java" "/home/agus/Downloads/installers/jdk-15.0.1/bin/java" 1
+$ sudo update-alternatives --install "/usr/bin/javac" "javac" "/home/agus/Downloads/installers/jdk-15.0.1/bin/javac" 1
+//$ sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/home/agus/Downloads/installers/jdk-15.0.1/bin/javaws" 1
+
+8)biarkan ubuntu mendefaultkan versi jdk yang diinstall
+$ sudo update-alternatives --set java /home/agus/Downloads/installers/jdk-15.0.1/bin/java
+$ sudo update-alternatives --set javac /home/agus/Downloads/installers/jdk-15.0.1/bin/javac
+$ sudo update-alternatives --set javaws /home/agus/Downloads/installers/jdk-15.0.1/bin/javaws
+
+9)cek apakah instalasi berhasil :
+$ java -version
+// jika berhasil akan menampilkan :
+java version "15.0.1" 2020-10-20
+Java(TM) SE Runtime Environment (build 15.0.1+9-18)
+Java HotSpot(TM) 64-Bit Server VM (build 15.0.1+9-18, mixed mode, sharing)
+
+B. INSTALL IDE ECLIPSE
+sumber: https://linuxize.com/post/how-to-install-the-latest-eclipse-ide-on-ubuntu-18-04/
+sumber: https://www3.ntu.edu.sg/home/ehchua/programming/howto/eclipsejava_howto.html
+$ sudo apt install default-jre
+$ sudo snap install --classic eclipse
+
+C. MENCETAK HELLO WORLD
+sumber: https://www3.ntu.edu.sg/home/ehchua/programming/howto/eclipsejava_howto.html
+silabus: 
+https://docs.google.com/spreadsheets/d/1tEhyRcj83YQeOsyidfpsZMhNgu3yTTm1PnlGxe_ba-g/edit#gid=0
+slide:
+https://docs.google.com/spreadsheets/d/1tEhyRcj83YQeOsyidfpsZMhNgu3yTTm1PnlGxe_ba-g/edit#gid=0
