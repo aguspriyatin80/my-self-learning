@@ -158,3 +158,4 @@ D. BAGIAN 4: PRACTICAL USE CASES
 LAYOUTING REFERENCE:
 https://aboutreact.com/flex-layout-designing/
 https://juliansci.github.io/css-flexbox-simulator/
+https://www.ostraining.com/blog/webdesign/css-flexbox-basic-concepts/
