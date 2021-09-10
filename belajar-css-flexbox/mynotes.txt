@@ -155,3 +155,6 @@ D. BAGIAN 4: PRACTICAL USE CASES
 - centering item
 - holy grail layout 
 
+LAYOUTING REFERENCE:
+https://aboutreact.com/flex-layout-designing/
+https://juliansci.github.io/css-flexbox-simulator/
